@@ -95,13 +95,19 @@ class DrawView @JvmOverloads constructor(
         }
     }
 
-    fun getBitmap(): Bitmap {
+    @JvmOverloads
+    fun getBitmap(transparent: Boolean = false): Bitmap {
         val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
-        canvas.drawColor(Color.WHITE)
+
+        if (!transparent) {
+            canvas.drawColor(Color.WHITE)
+        }
+
         mIsSaving = true
         draw(canvas)
         mIsSaving = false
+
         return bitmap
     }
 
